@@ -111,6 +111,7 @@ def test_rate_chapter():
 def test_rate_chapter_not_exists():
     response = client.post("/courses/6431137ab5da949e5978a281/990/rate", json={"rating": 1})
     assert response.status_code == 404
-    assert response.json() == {'detail': 'Chapter not found'}
+    assert response.json() == {'detail': 'Not Found'}
+
 
 

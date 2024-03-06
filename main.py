@@ -42,7 +42,7 @@ def get_courses(sort_by: str = "date", domain: str = None):
 def get_course(course_id: str):
     course = db["courses"].find_one({'_id': ObjectId(course_id)}, {'_id': 0, 'chapters': 0})
     if not course:
-        raise HTTPException(status_code=404, detail='Course not found!')
+        raise HTTPException(status_code=404, detail='Course not found')
     try:
         course["rating"] = course["rating"]["total"]
     except KeyError:
@@ -67,7 +67,7 @@ def get_chapter(course_id: str, chapter_id: str):
 def rate_chapter(course_id: str, chapter_id: str, rating: int = Query(gt=-2, lt=2)):
     course = db["courses"].find_one({'_id': ObjectId(course_id)}, {'_id': 0})
     if not course:
-        raise HTTPException(status_code=404, detail="Course not found!")
+        raise HTTPException(status_code=404, detail="Course not found")
     chapters = course.get('chapters', [])
     try:
         chapter = chapters[int(chapter_id)]
